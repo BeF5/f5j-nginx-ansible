@@ -81,13 +81,13 @@ AnsibleのNGINX Coreモジュールを取得します
 コマンドを実行することにより以下のモジュールがインストールされます。
 
 +--------------------------+----------------------------------------+--------+
-|Name	                     |Description	                            |Version |
+|Name                      |Description                             |Version |
 +==========================+========================================+========+
-|nginxinc.nginx	           |Install NGINX	                          |0.23.1  |
+|nginxinc.nginx            |Install NGINX                           |0.23.1  |
 +--------------------------+----------------------------------------+--------+
-|nginxinc.nginx_config	   |Configure NGINX	                        |0.5.1   |
+|nginxinc.nginx_config     |Configure NGINX                         |0.5.1   |
 +--------------------------+----------------------------------------+--------+
-|nginxinc.nginx_app_protect|Install and configure NGINX App Protect	|0.8.0   |
+|nginxinc.nginx_app_protect|Install and configure NGINX App Protect |0.8.0   |
 +--------------------------+----------------------------------------+--------+
 
 .. NOTE::
