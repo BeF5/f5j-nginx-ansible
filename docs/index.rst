@@ -21,7 +21,7 @@ F5 Labs - Index
 -----
 NGINXとAnsibleの活用に関する情報は以下のセミナーでご紹介しております。合わせてご参照ください。
 
-- `NGINX + Ansibleによるシステム構築・運用自動 <https://www.slideshare.net/Nginx/nginx-ansible-automation-webinar>`__
+- `NGINX + Ansibleによるシステム構築・運用自動化 <https://www.slideshare.net/Nginx/nginx-ansible-automation-webinar>`__
 
 Webinar(プレゼンテーション・デモ)
 -----
