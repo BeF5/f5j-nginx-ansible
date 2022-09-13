@@ -59,7 +59,7 @@ JinjaのUpdate
   
     $ sudo apt install python3-pip
 
-インストール可能なバージョンの確認 (Versionを指定せず、エラーの内容のVersionを確認します)
+インストール可能なバージョンの確認 (値を指定せず、エラーの内容として表示されたバージョンを確認します)
 
 .. code-block:: bash
   :linenos:
