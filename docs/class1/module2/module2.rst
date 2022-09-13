@@ -58,7 +58,7 @@ Ansibleが正しくインストールされたことを確認します
 
   | Ansibleでjinja templateを利用し、NGINXの設定を行う場合、エラーとなる場合があります。
   | エラーを回避するためには、Pythonのパッケージマネージャである ``pip`` をインストールし、 ``jinja2`` のパッケージをアップデートする必要があります。
-  | 詳細は ``Jinja Templateが正しく動作しない場合 <https://f5j-nginx-ansible.readthedocs.io/en/latest/class1/module3/module3.html>``__ を参照してください。
+  | 詳細は `Jinja Templateが正しく動作しない場合 <https://f5j-nginx-ansible.readthedocs.io/en/latest/class1/module3/module3.html>`__ を参照してください。
 
 AnsibleのNGINX Coreモジュールを取得します
 
