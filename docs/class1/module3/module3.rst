@@ -54,7 +54,10 @@ JinjaのUpdate
 .. NOTE::
 
   PIPがインストールされていない場合、以下のコマンドを参考にインストールしてください
-  $ sudo apt install python3-pip
+
+  .. code-block:: cmdin
+  
+    $ sudo apt install python3-pip
 
 インストール可能なバージョンの確認 (Versionを指定せず、エラーの内容のVersionを確認します)
 
