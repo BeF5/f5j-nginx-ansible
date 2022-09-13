@@ -55,7 +55,7 @@ JinjaのUpdate
 
   PIPがインストールされていない場合、以下のコマンドを参考にインストールしてください
 
-  .. code-block:: cmdin
+  .. code-block:: bash
   
     $ sudo apt install python3-pip
 
