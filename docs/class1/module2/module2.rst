@@ -11,7 +11,8 @@ Ansibleを使ってNGINXの環境をセットアップします
 
 NGINXのセットアップはAnsible Galaxyというサイトを通じて、NGINXが提供するモジュールを利用します
 
-NGINXが提供する ``nginx_core`` モジュールは以下です
+NGINXは ``nginx_core`` というコレクションを提供しています。詳細は以下URLを参照してください
+
 - `Ansible Galaxy nginx_core <https://galaxy.ansible.com/nginxinc/nginx_core>`__
 
 
