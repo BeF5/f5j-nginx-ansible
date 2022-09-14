@@ -167,7 +167,7 @@ Playbookの内容を確認します
 .. code-block:: bash
   :linenos:
   :caption: 実行結果サンプル
-  :emphasize-lines: 3-4,8,18,20-25
+  :emphasize-lines: 4,8,18
 
   ---
   - hosts: all
@@ -194,6 +194,8 @@ Playbookの内容を確認します
           nginx_app_protect_install_threat_campaigns: true
           nginx_app_protect_setup_license: false
           nginx_app_protect_remove_license: false
+
+- 4行目で ``nginxinc.nginx_core`` のコレクションを指定します
 
 - 8行目で ``nginx`` のロールを指定し、10-14行目でパラメータを指定します
 
@@ -322,45 +324,44 @@ Playbookの内容を確認します
 .. code-block:: bash
   :linenos:
   :caption: 実行結果サンプル
-  :emphasize-lines: 8,18,31,10-14,27,37
+  :emphasize-lines: 8,18,31,27,37
 
----
-- hosts: all
-  collections:
-    - nginxinc.nginx_core
-  tasks:
-    - name: CleanUp nginx.conf for Uninstall
-      ansible.builtin.include_role:
-        name: nginx_config
-      vars:
-        nginx_config_main_template_enable: true
-        nginx_config_main_template:
-          template_file: nginx.conf.j2
-          deployment_location: /etc/nginx/nginx.conf
-          backup: true
-
-    - name: Uniinstall NGINX Plus
-      ansible.builtin.include_role:
-        name: nginx
-      vars:
-        nginx_type: plus
-        nginx_setup: uninstall
-        #nginx_setup_license: false
-        nginx_license:
-          certificate: ~/nginx-repo.crt
-          key: ~/nginx-repo.key
-        nginx_remove_license: false
-        nginx_start: false
-
-    - name: Uninstall NGINX App Protect WAF/DoS
-      ansible.builtin.include_role:
-        name: nginx_app_protect
-      vars:
-        nginx_app_protect_waf_setup: uninstall
-        nginx_app_protect_dos_setup: uninstall
-        nginx_app_protect_setup_license: false
-        nginx_app_protect_remove_license: false
-        nginx_app_protect_start: false
+  ---
+  - hosts: all
+    collections:
+      - nginxinc.nginx_core
+    tasks:
+      - name: CleanUp nginx.conf for Uninstall
+        ansible.builtin.include_role:
+          name: nginx_config
+        vars:
+          nginx_config_main_template_enable: true
+          nginx_config_main_template:
+            template_file: nginx.conf.j2
+            deployment_location: /etc/nginx/nginx.conf
+            backup: true
+  
+      - name: Uniinstall NGINX Plus
+        ansible.builtin.include_role:
+          name: nginx
+        vars:
+          nginx_type: plus
+          nginx_setup: uninstall
+          nginx_license:
+            certificate: ~/nginx-repo.crt
+            key: ~/nginx-repo.key
+          nginx_remove_license: false
+          nginx_start: false
+  
+      - name: Uninstall NGINX App Protect WAF/DoS
+        ansible.builtin.include_role:
+          name: nginx_app_protect
+        vars:
+          nginx_app_protect_waf_setup: uninstall
+          nginx_app_protect_dos_setup: uninstall
+          nginx_app_protect_setup_license: false
+          nginx_app_protect_remove_license: false
+          nginx_app_protect_start: false
 
 
 
@@ -407,9 +408,9 @@ NGINX Plus、NGINX App Protect WAF/DoS をアンインストール
   PLAY RECAP *************************************************************************************************************************************************************************************************************************************
   10.1.1.7                   : ok=38   changed=12   unreachable=0    failed=0    skipped=55   rescued=0    ignored=1
 
-- 13-15行目: nginx_app_protect ロールで設定ファイルの書式をチェックする ``nginx -t`` が実行されていますが、
-NGINX Plusがアンインストールされているためコマンドが正常に完了しません。こちらは無視してよい動作です
-- 21行目: 実行結果が表示されます。 13-15行目の実行結果が ``ignore`` として表示されています
+
+- 13-15行目で、nginx_app_protect ロールで設定ファイルの書式をチェックする ``nginx -t`` が実行されていますが、NGINX Plusがアンインストールされているためコマンドが正常に完了しません。こちらは無視してよい動作です
+- 21行目で、実行結果が表示されます。 13-15行目の実行結果が ``ignore`` として表示されています
 
 インストール時に確認したコマンドで状態を確認すると以下のようになります。
 
