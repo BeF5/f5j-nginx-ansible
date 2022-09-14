@@ -57,7 +57,7 @@ Ansibleが正しくインストールされたことを確認します
   | エラーを回避するためには、Pythonのパッケージマネージャである ``pip`` をインストールし、 ``jinja2`` のパッケージをアップデートする必要があります。
   | 詳細は `Jinja Templateが正しく動作しない場合 <https://f5j-nginx-ansible.readthedocs.io/en/latest/class1/module3/module3.html>`__ を参照してください。
 
-AnsibleのNGINX Coreモジュールを取得します
+AnsibleのNGINX Coreコレクションを取得します
 
 .. code-block:: cmdin
 
@@ -75,7 +75,7 @@ AnsibleのNGINX Coreモジュールを取得します
   nginxinc.nginx_core:0.6.0 was installed successfully
 
 
-コマンドを実行することにより以下のモジュールがインストールされます。
+コマンドを実行することにより以下のロールがインストールされます。
 
 +--------------------------+----------------------------------------+--------+
 |Name                      |Description                             |Version |
@@ -195,14 +195,14 @@ Playbookの内容を確認します
           nginx_app_protect_setup_license: false
           nginx_app_protect_remove_license: false
 
-- 8行目で ``nginx`` のRoleを指定し、10-14行目でパラメータを指定します
+- 8行目で ``nginx`` のロールを指定し、10-14行目でパラメータを指定します
 
   - 10行目 ``nginx_type`` : InstallするNGINXをOpenSourceかPlusか指定します
   - 11行目 ``nginx_license`` : NGINX Plusに必要となる証明書・鍵を指定します
   - 14行目 ``nginx_remove_license`` : インストール後ライセンスファイルの削除を指定します
   - その他パラメータは `NGINX installation variables <https://github.com/nginxinc/ansible-role-nginx/blob/main/defaults/main/main.yml>`__ を参照してください
 
-- 18行目で ``nginx_app_protect`` のRoleを指定し、20-25行目でパラメータを指定します
+- 18行目で ``nginx_app_protect`` のロールを指定し、20-25行目でパラメータを指定します
 
   - 20行目 ``nginx_app_protect_waf_enable`` : NGINX App Protect WAF をインストールします
   - 21行目 ``nginx_app_protect_dos_enable`` : NGINX App Protect DoS をインストールします
@@ -364,12 +364,12 @@ Playbookの内容を確認します
 
 
 
-- 8行目で ``nginx_config`` のRoleを指定し、10-14行目でパラメータを指定します
+- 8行目で ``nginx_config`` のロールを指定し、10-14行目でパラメータを指定します
 
-  - 10-14行目 : ``/etc/nginx/`` に ``nginx.conf`` を作成します。モジュール削除のため空の設定ファイルとします
+  - 10-14行目 : ``/etc/nginx/`` に ``nginx.conf`` を作成します。アンインストールのエラーを回避するため空の設定ファイルとします
 
-- 18行目で ``nginx`` のRoleを指定し、20行目で ``nginx_setup`` で ``uninstall`` を指定します
-- 31行目で ``nginx_app_protect`` のRoleを指定し、33行目で ``nginx_app_protect_waf_setup`` 34行目 ``uninstnginx_app_protect_dos_setupall`` で ``uninstall`` を指定します
+- 18行目で ``nginx`` のロールを指定し、20行目で ``nginx_setup`` で ``uninstall`` を指定します
+- 31行目で ``nginx_app_protect`` のロールを指定し、33行目で ``nginx_app_protect_waf_setup`` 34行目 ``uninstnginx_app_protect_dos_setupall`` で ``uninstall`` を指定します
 - 27行目で ``nginx_start: false`` 、 37行目で ``nginx_app_protect_start: false`` としています。このパラメータによりアンインストール後のプロセス再起動の動作を回避します
 
 
@@ -407,7 +407,7 @@ NGINX Plus、NGINX App Protect WAF/DoS をアンインストール
   PLAY RECAP *************************************************************************************************************************************************************************************************************************************
   10.1.1.7                   : ok=38   changed=12   unreachable=0    failed=0    skipped=55   rescued=0    ignored=1
 
-- 13-15行目: nginx_app_protect Roleで設定ファイルの書式をチェックする ``nginx -t`` が実行されていますが、
+- 13-15行目: nginx_app_protect ロールで設定ファイルの書式をチェックする ``nginx -t`` が実行されていますが、
 NGINX Plusがアンインストールされているためコマンドが正常に完了しません。こちらは無視してよい動作です
 - 21行目: 実行結果が表示されます。 13-15行目の実行結果が ``ignore`` として表示されています
 
