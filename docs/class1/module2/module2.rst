@@ -3,10 +3,6 @@ NGINX Plus のセットアップ
 
 Ansibleを使ってNGINXの環境をセットアップします
 
-| 以下の手順に従ってNGINX Ingress Controllerのイメージを作成します  
-| 参考： `Installation with Manifests <https://docs.nginx.com/nginx-ingress-controller/installation/installation-with-manifests/>`__
-
-
 1. Ansibleとは？
 ====
 
@@ -200,17 +196,17 @@ Playbookの内容を確認します
 
 - 8行目で ``nginx`` のRoleを指定し、10-14行目でパラメータを指定します
 
-  - 10行目 nginx_type : InstallするNGINXをOpenSourceかPlusか指定します
-  - 11行目 nginx_license : NGINX Plusに必要となる証明書・鍵を指定します
-  - 14行目 nginx_remove_license : インストール後ライセンスファイルの削除を指定します
+  - 10行目 ``nginx_type`` : InstallするNGINXをOpenSourceかPlusか指定します
+  - 11行目 ``nginx_license`` : NGINX Plusに必要となる証明書・鍵を指定します
+  - 14行目 ``nginx_remove_license`` : インストール後ライセンスファイルの削除を指定します
   - その他パラメータは `NGINX installation variables <https://github.com/nginxinc/ansible-role-nginx/blob/main/defaults/main/main.yml>`__ を参照してください
 
 - 18行目で ``nginx_app_protect`` のRoleを指定し、20-25行目でパラメータを指定します
 
-  - 20行目 nginx_app_protect_waf_enable : NGINX App Protect WAF をインストールします
-  - 21行目 nginx_app_protect_dos_enable : NGINX App Protect DoS をインストールします
-  - 22-23行目 nginx_app_protect_* : WAFのSignature、Threat Campaign Signatureをインストールします
-  - 24-25 nginx_app_protect_*_license : ライセンスの利用、インストール後のライセンスファイルの削除を指定します
+  - 20行目 ``nginx_app_protect_waf_enable`` : NGINX App Protect WAF をインストールします
+  - 21行目 ``nginx_app_protect_dos_enable`` : NGINX App Protect DoS をインストールします
+  - 22-23行目 ``nginx_app_protect_*`` : WAFのSignature、Threat Campaign Signatureをインストールします
+  - 24-25 ``nginx_app_protect_*_license`` : ライセンスの利用、インストール後のライセンスファイルの削除を指定します
   - その他パラメータは `NGINX App Protect installation and configuration variables <https://github.com/nginxinc/ansible-role-nginx-app-protect/blob/main/defaults/main.yml>`__ を参照してください
 
 NGINX Plus、NGINX App Protect WAF/DoS をインストール
@@ -224,16 +220,16 @@ NGINX Plus、NGINX App Protect WAF/DoS をインストール
   :linenos:
   :caption: 実行結果サンプル
 
-  PLAY [all] ******************************************************************************************************************************************************************************************************************************************
+  PLAY [all] *************************************************************************************************************************************************************
   
-  TASK [Gathering Facts] ******************************************************************************************************************************************************************************************************************************
+  TASK [Gathering Facts] *************************************************************************************************************************************************
   ok: [10.1.1.7]
   
-  TASK [Install NGINX Plus] ***************************************************************************************************************************************************************************************************************************
+  TASK [Install NGINX Plus] **********************************************************************************************************************************************
   
   ** 省略 **
 
-  PLAY RECAP ******************************************************************************************************************************************************************************************************************************************
+  PLAY RECAP *************************************************************************************************************************************************************
   10.1.1.7                   : ok=49   changed=22   unreachable=0    failed=0    skipped=45   rescued=0    ignored=0
 
 実行したコマンドのオプションの指定パラメータは以下です
@@ -307,7 +303,157 @@ NGINX App Protect DoS のVersion
   ii  app-protect-engine                 8.12.1-1~focal                        amd64        NGINX App Protect
   ii  app-protect-plugin                 3.671.0-1~focal                       amd64        NGINX App Protect plugin
 
+4. NGINX の削除
+====
 
+同様の手順でNGINXを削除することが可能です
+
+ライセンスファイルが配置されていることを確認してください。
+ファイルが配置されていない場合、トライアルを申請し証明書と鍵を取得してください
+
+Playbookの内容を確認します
+
+.. code-block:: cmdin
+
+  ## cd ~/f5j-nginx-ansible-lab
+  cat playbook/remove-nginx-plus-app-protect-waf-dos.yaml
+
+.. code-block:: bash
+  :linenos:
+  :caption: 実行結果サンプル
+  :emphasize-lines: 8,18,31,10-14,27,37
+
+---
+- hosts: all
+  collections:
+    - nginxinc.nginx_core
+  tasks:
+    - name: CleanUp nginx.conf for Uninstall
+      ansible.builtin.include_role:
+        name: nginx_config
+      vars:
+        nginx_config_main_template_enable: true
+        nginx_config_main_template:
+          template_file: nginx.conf.j2
+          deployment_location: /etc/nginx/nginx.conf
+          backup: true
+
+    - name: Uniinstall NGINX Plus
+      ansible.builtin.include_role:
+        name: nginx
+      vars:
+        nginx_type: plus
+        nginx_setup: uninstall
+        #nginx_setup_license: false
+        nginx_license:
+          certificate: ~/nginx-repo.crt
+          key: ~/nginx-repo.key
+        nginx_remove_license: false
+        nginx_start: false
+
+    - name: Uninstall NGINX App Protect WAF/DoS
+      ansible.builtin.include_role:
+        name: nginx_app_protect
+      vars:
+        nginx_app_protect_waf_setup: uninstall
+        nginx_app_protect_dos_setup: uninstall
+        nginx_app_protect_setup_license: false
+        nginx_app_protect_remove_license: false
+        nginx_app_protect_start: false
+
+
+
+- 8行目で ``nginx_config`` のRoleを指定し、10-14行目でパラメータを指定します
+
+  - 10-14行目 : ``/etc/nginx/`` に ``nginx.conf`` を作成します。モジュール削除のため空の設定ファイルとします
+
+- 18行目で ``nginx`` のRoleを指定し、20行目で ``nginx_setup`` で ``uninstall`` を指定します
+- 31行目で ``nginx_app_protect`` のRoleを指定し、33行目で ``nginx_app_protect_waf_setup`` 34行目 ``uninstnginx_app_protect_dos_setupall`` で ``uninstall`` を指定します
+- 27行目で ``nginx_start: false`` 、 37行目で ``nginx_app_protect_start: false`` としています。このパラメータによりアンインストール後のプロセス再起動の動作を回避します
+
+
+NGINX Plus、NGINX App Protect WAF/DoS をアンインストール
+
+.. code-block:: cmdin
+
+  ## cd ~/f5j-nginx-ansible-lab
+  ansible-playbook -i inventories/hosts -l nginx1 playbook/remove-nginx-plus-app-protect-waf-dos.yaml --private-key="/home/ubuntu/id_rsa"  --become
+
+.. code-block:: bash
+  :linenos:
+  :caption: 実行結果サンプル
+  :emphasize-lines: 13-15,21
+
+  PLAY [all] *************************************************************************************************************************************************************
+  
+  TASK [Gathering Facts] *************************************************************************************************************************************************
+  ok: [10.1.1.7]
+  
+  TASK [CleanUp nginx.conf for Uninstall] ********************************************************************************************************************************
+
+  ** 省略 **
+  
+  RUNNING HANDLER [nginxinc.nginx_core.nginx_app_protect : (Handler - NGINX App Protect) Restart NGINX] ******************************************************************************************************************************************
+  skipping: [10.1.1.7]
+  
+  RUNNING HANDLER [nginxinc.nginx_core.nginx_app_protect : (Handler - NGINX App Protect) Check NGINX] ********************************************************************************************************************************************
+  fatal: [10.1.1.7]: FAILED! => {"changed": false, "cmd": "nginx -t", "msg": "[Errno 2] No such file or directory: b'nginx'", "rc": 2, "stderr": "", "stderr_lines": [], "stdout": "", "stdout_lines": []}
+  ...ignoring
+  
+  RUNNING HANDLER [nginxinc.nginx_core.nginx_app_protect : (Handler - NGINX App Protect) Print NGINX error if syntax check fails] ****************************************************************************************************************
+  skipping: [10.1.1.7]
+  
+  PLAY RECAP *************************************************************************************************************************************************************************************************************************************
+  10.1.1.7                   : ok=38   changed=12   unreachable=0    failed=0    skipped=55   rescued=0    ignored=1
+
+- 13-15行目: nginx_app_protect Roleで設定ファイルの書式をチェックする ``nginx -t`` が実行されていますが、
+NGINX Plusがアンインストールされているためコマンドが正常に完了しません。こちらは無視してよい動作です
+- 21行目: 実行結果が表示されます。 13-15行目の実行結果が ``ignore`` として表示されています
+
+インストール時に確認したコマンドで状態を確認すると以下のようになります。
+
+.. code-block:: bash
+  :linenos:
+  :caption: 確認結果サンプル
+
+  $ cat /opt/app_protect/VERSION
+  cat: /opt/app_protect/VERSION: No such file or directory
+
+  $ nginx -v
+  -bash: /usr/sbin/nginx: No such file or directory
+
+  $ dpkg-query -l | grep nginx-plus
+  rc  nginx-plus                         27-1~focal                            amd64        NGINX Plus, provided by Nginx, Inc.
+
+  $ dpkg-query -l | grep app-protect
+  rc  app-protect                        27+3.954.0-1~focal                    amd64        App-Protect package for Nginx Plus, Includes all of the default files and examples. Nginx App Protect provides web application firewall (WAF) security protection for your web applications, including OWASP Top 10 attacks.
+  ii  app-protect-common                 10.87.0-1~focal                       amd64        NGINX App Protect
+  rc  app-protect-compiler               10.87.0-1~focal                       amd64        Control-plane(aka CP) for waf-general debian
+  rc  app-protect-dos                    27+2.4.1-1~focal                      amd64        Nginx DoS protection
+  rc  app-protect-engine                 10.87.0-1~focal                       amd64        NGINX App Protect
+  rc  app-protect-plugin                 3.954.0-1~focal                       amd64        NGINX App Protect plugin
+  
+
+プログラムとして ``app-protect-common`` は残った状態になりますので、完全に削除されたい場合には以下のコマンドを参考に削除してください。
+
+.. code-block:: cmdin
+
+  sudo apt remove app-protect-common
+
+Ansibleでアンインストールを行った場合、NGINX Plusの設定ファイルが残ります。完全に削除する場合には以下コマンドを参考に削除してください。
+
+.. code-block:: cmdin
+
+  sudo apt remove nginx-plus --purge
+
+NGINX Plusを完全に削除した後、 ``/etc/nginx`` フォルダが削除されます
+
+.. code-block:: bash
+  :linenos:
+  :caption: 確認結果サンプル
+
+  $ ls /etc/nginx
+  ls: cannot access '/etc/nginx': No such file or directory
 
 
 Tips1. Ansible Galaxy 各種コマンド
