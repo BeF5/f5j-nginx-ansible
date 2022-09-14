@@ -306,7 +306,7 @@ NGINX App Protect DoS のVersion
   ii  app-protect-engine                 8.12.1-1~focal                        amd64        NGINX App Protect
   ii  app-protect-plugin                 3.671.0-1~focal                       amd64        NGINX App Protect plugin
 
-4. NGINX の削除
+4. NGINX のアンインストール
 ====
 
 同様の手順でNGINXを削除することが可能です
