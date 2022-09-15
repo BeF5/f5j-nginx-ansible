@@ -1,4 +1,4 @@
-インストール・アンインストール
+NGINXのセットアップ
 ####
 
 1. 事前確認
@@ -40,7 +40,7 @@ Inventoryの情報を以下コマンドで確認します
 
 ``nginx1`` と ``nginx2`` という2つのホストが登録されていることが確認できます
 
-2. NGINX Plus,NAP WAF/DoSのインストール
+2. NGINX Plus、NAP WAF/DoSのインストール
 ====
 
 Playbookの内容を確認します
@@ -192,11 +192,11 @@ NGINX App Protect DoS のVersion
   ii  app-protect-engine                 8.12.1-1~focal                        amd64        NGINX App Protect
   ii  app-protect-plugin                 3.671.0-1~focal                       amd64        NGINX App Protect plugin
 
-3. NGINX Plus,NAP WAF/DoSのアンインストール
+3. NGINX Plus、NAP WAF/DoSのアンインストール
 ====
 
 ライセンス、Playbookなど正しく配置していることを想定し説明を進めます。
-確認が必要な場合 `1. 事前確認 <>`__ を参照してください。
+確認が必要な場合 `1. 事前確認 <https://f5j-nginx-ansible.readthedocs.io/en/latest/class1/module3/module3.html#id2>`__ を参照してください。
 
 
 Playbookの内容を確認します

@@ -1,6 +1,22 @@
 インストール時に設定ファイルを作成する
 ####
 
+.. NOTE::
+
+  | 同環境でNGINXをアンインストール後に本作業を行う場合、設定ファイルの情報が残っている場合があります。
+  | 完全に削除する場合には以下コマンドを参考に削除してください。
+
+  .. code-block::
+
+    sudo apt remove nginx-plus --purge
+
+.. NOTE::
+
+  | Ansibleでjinja templateを利用し、NGINXの設定を行う場合、エラーとなる場合があります。
+  | エラーを回避するためには、Pythonのパッケージマネージャである ``pip`` をインストールし、 ``jinja2`` のパッケージをアップデートする必要があります。
+  | 詳細は `Jinja Templateが正しく動作しない場合 <https://f5j-nginx-ansible.readthedocs.io/en/latest/class1/module9/module9.html#jinja-template>`__ を参照してください。
+
+
 1. インストール、設定ファイル作成
 ====
 
@@ -8,7 +24,7 @@ NGINX Plus, NAP WAF/DoSインストールと同時に設定ファイルを作成
 プロジェクトで共通の設定や初期設定がある場合にはこの方法が便利です。
 
 ライセンス、Playbookなど正しく配置していることを想定し説明を進めます。
-確認が必要な場合 `1. 事前確認 <>`__ を参照してください。
+確認が必要な場合 `1. 事前確認 <https://f5j-nginx-ansible.readthedocs.io/en/latest/class1/module3/module3.html#id2>`__ を参照してください。
 
 Playbookの内容を確認します
 
@@ -169,7 +185,7 @@ Playbookの内容を確認します
               deployment_location: /usr/share/nginx/html/server_two.html
               web_server_name: Ansible NGINX collection - Server two
 
-- 6-25行目は、NGINX Plus、NGINX App Protect、NGINX App Protect DoS のインストールとなります。詳細は `<>`__ を参照してください
+
 - 29行目で ``nginx_config`` のロールを指定し、以降パラメータを指定し設定ファイルを生成します
 - 31-33行目で、 ``nginx_config_modules`` により、利用するモジュールを指定します。この内容は ``nginx.conf`` の先頭に記述されます
 - 34行目で、 ``nginx_config_http_template_enable`` により、HTTPを制御するNGINXの設定を記述することを指定していします
@@ -185,6 +201,8 @@ Playbookの内容を確認します
   - 141,144行目 ``template_file`` : 利用するHTML Teamplateを指定します
   - 142,145行目 ``deployment_location`` : 生成したファイルの保存場所を指定します
   - 143,146行目 ``web_server_name`` : サーバ名を指定します
+
+- その他の詳細は `GitHub ansible-role-nginx-config <https://github.com/nginxinc/ansible-role-nginx-config>`__ を参照してください
 
 NGINX Plus、NGINX App Protect WAF/DoS をインストール
 
