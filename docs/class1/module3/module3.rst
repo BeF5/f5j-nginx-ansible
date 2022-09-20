@@ -209,7 +209,7 @@ Playbookの内容を確認します
 .. code-block:: bash
   :linenos:
   :caption: 実行結果サンプル
-  :emphasize-lines: 8,21,17,27
+  :emphasize-lines: 8,11,16,26,20,22,23
 
   ---
   - hosts: all
@@ -239,9 +239,9 @@ Playbookの内容を確認します
           nginx_app_protect_start: false
 
 
-- 8行目で ``nginx`` のロールを指定し、20行目で ``nginx_setup`` で ``uninstall`` を指定します
-- 21行目で ``nginx_app_protect`` のロールを指定し、23行目で ``nginx_app_protect_waf_setup`` 24行目 ``uninstnginx_app_protect_dos_setupall`` で ``uninstall`` を指定します
-- 17行目で ``nginx_start: false`` 、 27行目で ``nginx_app_protect_start: false`` としています。このパラメータによりアンインストール後のプロセス再起動の動作を回避します
+- 8行目で ``nginx`` のロールを指定し、11行目で ``nginx_setup`` で ``uninstall`` を指定します
+- 20行目で ``nginx_app_protect`` のロールを指定し、22行目で ``nginx_app_protect_waf_setup`` 23行目 ``uninstnginx_app_protect_dos_setupall`` で ``uninstall`` を指定します
+- 16行目で ``nginx_start: false`` 、 26行目で ``nginx_app_protect_start: false`` としています。このパラメータによりアンインストール後のプロセス再起動の動作を回避します
 
 
 NGINX Plus、NGINX App Protect WAF/DoS をアンインストール
