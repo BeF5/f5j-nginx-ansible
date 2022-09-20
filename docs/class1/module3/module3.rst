@@ -299,7 +299,6 @@ NGINX Plus、NGINX App Protect WAF/DoS をアンインストール
   sudo apt install nginx-full    # version 1.18.0-0ubuntu1.3
   sudo apt install nginx-light   # version 1.18.0-0ubuntu1.3
 
-
   $ dpkg-query -l | grep nginx-plus
   rc  nginx-plus                         27-1~focal                            amd64        NGINX Plus, provided by Nginx, Inc.
 
@@ -318,7 +317,7 @@ NGINX Plus、NGINX App Protect WAF/DoS をアンインストール
 
   sudo apt remove app-protect-common
 
-Ansibleでアンインストールを行った場合、NGINX Plusの設定ファイルが残ります。完全に削除する場合には以下コマンドを参考に削除してください。
+Ansibleでアンインストールを行った場合、NGINX Plusの設定ファイルが残ります。Ubuntu環境で完全に削除する場合には以下コマンドを参考に削除してください。
 
 .. code-block:: cmdin
 

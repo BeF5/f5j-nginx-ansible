@@ -265,6 +265,4 @@ F5 UDFのラボ環境で実行する場合、同環境にELKをデプロイし�
 3. 環境の削除
 ====
 
-環境を削除する場合、 ` <https://f5j-nginx-ansible.readthedocs.io/en/latest/class1/module3/module3.html#id3>`__ の内容を参考にコマンドを実行してください
-
-
+環境を削除する場合、 `3. NGINX Plus、NAP WAF/DoSのアンインストール <https://f5j-nginx-ansible.readthedocs.io/en/latest/class1/module3/module3.html#id2>`__ の内容を参考にコマンドを実行してください
