@@ -128,7 +128,7 @@ NGINX Plus、NGINX App Protect WAF/DoS をインストール
 .. code-block:: cmdin
 
   ## cd ~/f5j-nginx-ansible-lab
-  ansible-playbook -i inventories/hosts -l nginx1 playbook/deploy-nginx-plus-app-protect-waf-dos-proxywafconf.yaml --private-key="~/ssh_key/id_rsa"  --become
+  ansible-playbook -i inventories/hosts -l nginx1 playbook/deploy-nginx-plus-app-protect-waf-dos-proxywafconf.yaml --private-key="~/.ssh/id_rsa"  --become
 
 .. code-block:: bash
   :linenos:
