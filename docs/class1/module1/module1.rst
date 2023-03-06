@@ -34,7 +34,7 @@ Windows Jump HostからCLIの操作を行う場合、以下タブからRDP Clien
 
 .. NOTE::
    | RDPのUser名、パスワードはDETAILSをクリックし、GeneralのタブのCredentialsの項目を参照ください
-   | ``Administrator`` でログインしてください 
+   | ``user`` でログインしてください 
 
    - .. image:: ./media/udf_jumpbox_loginuser.png
        :width: 200
