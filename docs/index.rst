@@ -29,6 +29,14 @@ Webinar(プレゼンテーション・デモ)
 - `迅速なリリースサイクルを実現するNGINX + Ansibleによるシステム構築・運用自動化セミナー <https://www.nginx.co.jp/resources/webinars/automate-nginx-plus-environment-with-ansible-collection-jp/>`__
 
 
+NGINX セットアップガイド トップページ
+====
+
+NGINX のその他ラボガイドは以下を参照してください
+
+- `NGINX セットアップガイド・ラボガイド <https://f5j-tech-info.readthedocs.io/ja/latest/content03/content3.html>`__
+
+
 
 .. toctree::
    :maxdepth: 3
