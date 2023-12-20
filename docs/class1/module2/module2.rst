@@ -87,11 +87,6 @@ AnsibleのNGINX Coreコレクションを取得します
 |nginxinc.nginx_app_protect|Install and configure NGINX App Protect |0.8.0   |
 +--------------------------+----------------------------------------+--------+
 
-.. NOTE::
-
-  記載のVersionは資料作成時点 ``0.6.0`` の内容となります。最新情報はAnsible Galaxyのページを確認ください
-
-
 以下のパスにファイルが取得されていることを確認します
 
 .. code-block:: cmdin
@@ -135,7 +130,7 @@ Tips1. Ansible Galaxy 各種コマンド
   # /home/ubuntu/.ansible/collections/ansible_collections
   Collection          Version
   ------------------- -------
-  nginxinc.nginx_core 0.6.0
+  nginxinc.nginx_core 0.8.0
 
 
 Authorを指定したロールの検索
