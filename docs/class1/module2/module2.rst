@@ -168,27 +168,6 @@ Authorを指定したロールの検索
    nginxinc.nginx_controller_user_role             A role to define user roles within NGINX Controller.
    nginxinc.nginx_unit                             Official Ansible role for NGINX Unit
 
-キーワード、Authorを指定したロールの検索
-
-.. code-block:: cmdin
-
-  ansible-galaxy search development --author nginx
-
-.. code-block:: bash
-  :linenos:
-  :caption: 実行結果サンプル
-
-  Found 5 roles matching your search:
-  
-   Name                                  Description
-   ----                                  -----------
-   nginxinc.nginx                        Official Ansible role for NGINX
-   nginxinc.nginx_app_protect            Official Ansible role for NGINX App Protect WAF and DoS
-   nginxinc.nginx_config                 Official Ansible role for configuring NGINX
-   nginxinc.nginx_controller_environment A role to define environments within NGINX Controller.
-   nginxinc.nginx_unit                   Official Ansible role for NGINX Unit
-
-
 Tips2. Inventory情報確認コマンド
 ====
 
