@@ -171,6 +171,13 @@ Authorを指定したロールの検索
 Tips2. Inventory情報確認コマンド
 ====
 
+NGINXは Ansible Playbookの設定サンプルをGitHubで公開しています。ファイルを取得します。
+
+.. code-block:: cmdin
+  ## cd ~/
+  git clone https://github.com/BeF5/f5j-nginx-ansible-lab.git
+  cd ~/f5j-nginx-ansible-lab
+
 Graph形式でのInventory情報の表示
 
 .. code-block:: cmdin
